@@ -1,0 +1,17 @@
+# OS X
+.DS_Store*
+._*
+
+# Linux
+.directory
+*~
+
+
+# npm
+node_modules
+package-lock.json
+*.log
+
+# IDE
+.idea
+.vscode
