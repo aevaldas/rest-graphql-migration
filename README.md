@@ -5,11 +5,11 @@
 
 ## REST APIs to migrate
 Company:
-* `GET /api/company`  Returns the list of all the company
-* `GET /api/company/:id` Returns the company which has id
-* `POST /api/company` Creates a new company with details in request body
-* `DELETE /api/company/:id` Deletes a company which has id
-* `GET /api/company/:companyId/employees` Returns company's which has companyId employees
+* `GET /api/companies`  Returns the list of all the company
+* `GET /api/companies/:id` Returns the company which has id
+* `POST /api/companies` Creates a new company with details in request body
+* `DELETE /api/companies/:id` Deletes a company which has id
+* `GET /api/companies/:companyId/employees` Returns company's which has companyId employees
 
 Employees:
 * `GET /api/employees/:id` Returns employee which has id
