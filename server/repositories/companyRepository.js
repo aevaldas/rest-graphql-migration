@@ -34,7 +34,7 @@ function save(company) {
 }
 
 function getById(companyId) {
-    const company = companies.find(item => item.id === companyId);
+    const company = companies.find(item => item.id == companyId);
 
     if (!company) {
         throw new Error(`Company with id: ${companyId} not found`);
@@ -44,9 +44,9 @@ function getById(companyId) {
 }
 
 function deleteById(companyId) {
-    const companyIndex = companies.findIndex(item => item.id === companyId);
+    const companyIndex = companies.findIndex(item => item.id == companyId);
 
-    if (companyIndex === -1) {
+    if (companyIndex == -1) {
         throw new Error(`Company with id: ${companyId} not found`);
     }
 

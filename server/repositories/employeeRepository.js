@@ -3,7 +3,7 @@ const companies = require('../mocks/companies');
 const employees = require('../mocks/employees');
 
 const doesCompanyIdExist = (value, helper) => {
-    if (!companies.find(company => company.id === value)) {
+    if (!companies.find(company => company.id == value)) {
         throw new Error(`Company with id: ${value} not found`);
     }
 
@@ -29,7 +29,7 @@ function getAll() {
 }
 
 function getAllByCompanyId(companyId) {
-    return employees.filter(item => item.companyId === companyId);
+    return employees.filter(item => item.companyId == companyId);
 }
 
 function getNewId() {
@@ -49,7 +49,7 @@ function save(employee) {
 }
 
 function getById(employeeId) {
-    const employee = employees.find(item => item.id === employeeId);
+    const employee = employees.find(item => item.id == employeeId);
 
     if (!employee) {
         throw new Error(`Employee with id: ${employeeId} not found`);
@@ -59,9 +59,9 @@ function getById(employeeId) {
 }
 
 function deleteById(employeeId) {
-    const employeeIndex = employees.findIndex(item => item.id === employeeId);
+    const employeeIndex = employees.findIndex(item => item.id == employeeId);
 
-    if (employeeIndex === -1) {
+    if (employeeIndex == -1) {
         throw new Error(`Employee with id: ${employeeId} not found`);
     }
 
