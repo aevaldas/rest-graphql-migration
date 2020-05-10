@@ -1,1 +1,11 @@
 @import '~antd/dist/antd.css';
+
+.layout {
+    min-height: 100vh
+}
+
+.content {
+    background: #fff;
+    margin: 50px;
+    padding: 24px;
+}
