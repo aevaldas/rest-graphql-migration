@@ -49,7 +49,7 @@ class Company extends React.Component {
     deleteEmployee = (id) => {
         return axios.delete(`/employees/${id}`).then(() => {
             this.setState(({employees}) => {
-                const index = employees.findIndex(item => item.id === id);
+                const index = employees.findIndex(item => item.key === id);
 
                 if (index === -1) {
                     return null;
