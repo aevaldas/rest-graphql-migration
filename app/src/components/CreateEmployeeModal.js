@@ -5,7 +5,7 @@ import axios from "../axios";
 const CreateEmployeeModal = ({companyId, visible, onCreate, onCancel}) => {
     const [form] = Form.useForm();
 
-    const createCompany = (data) => axios.post('/employees', {...data, companyId});
+    const createEmployee = (data) => axios.post('/employees', {...data, companyId});
 
     return (
         <Modal
@@ -17,7 +17,7 @@ const CreateEmployeeModal = ({companyId, visible, onCreate, onCancel}) => {
             onOk={async () => {
                 try {
                     const values = await form.validateFields();
-                    const {data} = await createCompany(values);
+                    const {data} = await createEmployee(values);
                     form.resetFields();
                     onCreate(data);
                 } catch (e) {}
