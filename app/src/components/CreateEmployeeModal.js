@@ -1,12 +1,15 @@
 import React from "react";
 import { Form, Input, Modal } from "antd";
-import axios from "../axios";
+import client, { CREATE_EMPLOYEE } from "../client";
 
 const CreateEmployeeModal = ({ companyId, visible, onCreate, onCancel }) => {
   const [form] = Form.useForm();
 
   const createEmployee = (data) =>
-    axios.post("/employees", { ...data, companyId });
+    client.mutate({
+      mutation: CREATE_EMPLOYEE,
+      variables: { data: { ...data, companyId } },
+    });
 
   return (
     <Modal
@@ -20,7 +23,7 @@ const CreateEmployeeModal = ({ companyId, visible, onCreate, onCancel }) => {
           const values = await form.validateFields();
           const { data } = await createEmployee(values);
           form.resetFields();
-          onCreate(data);
+          onCreate(data.createEmployee);
         } catch (e) {}
       }}
     >

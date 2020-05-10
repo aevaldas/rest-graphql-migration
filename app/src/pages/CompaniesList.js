@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button, PageHeader, Space, Table } from "antd";
-import axios from "../axios";
+import client, { GET_COMPANIES } from "../client";
 import CreateCompanyModal from "../components/CreateCompanyModal";
 import { formatDataForTable } from "../utils";
 
@@ -42,10 +42,10 @@ class CompaniesList extends React.Component {
   }
 
   getData = () =>
-    axios.get("/companies").then((res) => {
+    client.query({ query: GET_COMPANIES }).then((res) => {
       this.setState({
         isLoading: false,
-        data: res.data,
+        data: res.data.companies,
       });
     });
 

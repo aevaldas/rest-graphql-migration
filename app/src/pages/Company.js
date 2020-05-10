@@ -8,7 +8,12 @@ import {
   Space,
   Table,
 } from "antd";
-import axios from "../axios";
+import client, {
+  DELETE_COMPANY,
+  DELETE_EMPLOYEE,
+  GET_COMPANY,
+  GET_COMPANY_EMPLOYEES,
+} from "../client";
 import CreateEmployeeModal from "../components/CreateEmployeeModal";
 import { formatDataForTable } from "../utils";
 
@@ -25,26 +30,45 @@ class Company extends React.Component {
   }
 
   getCompany = () => {
-    return axios
-      .get(`/companies/${this.props.match.params.companyId}`)
-      .then(({ data: { title, address } }) => {
-        this.setState({
-          isLoading: false,
-          title,
-          address,
-        });
-        this.getEmployees();
+    return client
+      .query({
+        query: GET_COMPANY,
+        variables: {
+          companyId: this.props.match.params.companyId,
+        },
       })
+      .then(
+        ({
+          data: {
+            company: { title, address },
+          },
+        }) => {
+          this.setState({
+            isLoading: false,
+            title,
+            address,
+          });
+          this.getEmployees();
+        }
+      )
       .catch(this.toCompanies);
   };
 
   getEmployees = () => {
-    return axios
-      .get(`/companies/${this.props.match.params.companyId}/employees`)
-      .then(({ data }) => {
+    return client
+      .query({
+        query: GET_COMPANY_EMPLOYEES,
+        variables: {
+          companyId: this.props.match.params.companyId,
+        },
+      })
+      .then(({ data: { getCompanyEmployees } }) => {
         this.setState({
           isLoadingEmployees: false,
-          employees: data.map(({ id, ...rest }) => ({ key: id, ...rest })),
+          employees: getCompanyEmployees.map(({ id, ...rest }) => ({
+            key: id,
+            ...rest,
+          })),
         });
       });
   };
@@ -54,28 +78,38 @@ class Company extends React.Component {
   };
 
   deleteCompany = () => {
-    return axios
-      .delete(`/companies/${this.props.match.params.companyId}`)
+    return client
+      .mutate({
+        mutation: DELETE_COMPANY,
+        variables: {
+          companyId: this.props.match.params.companyId,
+        },
+      })
       .then(this.toCompanies);
   };
 
   deleteEmployee = (id) => {
-    return axios.delete(`/employees/${id}`).then(() => {
-      this.setState(({ employees }) => {
-        const index = employees.findIndex((item) => item.key === id);
+    return client
+      .mutate({
+        mutation: DELETE_EMPLOYEE,
+        variables: { id },
+      })
+      .then(() => {
+        this.setState(({ employees }) => {
+          const index = employees.findIndex((item) => item.key === id);
 
-        if (index === -1) {
-          return null;
-        }
+          if (index === -1) {
+            return null;
+          }
 
-        return {
-          employees: [
-            ...employees.slice(0, index),
-            ...employees.slice(index + 1, index.length),
-          ],
-        };
+          return {
+            employees: [
+              ...employees.slice(0, index),
+              ...employees.slice(index + 1, index.length),
+            ],
+          };
+        });
       });
-    });
   };
 
   onEmployeeCreateCancel = () =>

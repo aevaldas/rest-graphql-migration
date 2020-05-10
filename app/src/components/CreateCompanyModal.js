@@ -1,11 +1,15 @@
 import React from "react";
 import { Form, Input, Modal } from "antd";
-import axios from "../axios";
+import client, { CREATE_COMPANY } from "../client";
 
 const CreateCompanyModal = ({ visible, onCreate, onCancel }) => {
   const [form] = Form.useForm();
 
-  const createCompany = (data) => axios.post("/companies", data);
+  const createCompany = (data) =>
+    client.mutate({
+      mutation: CREATE_COMPANY,
+      variables: { data },
+    });
 
   return (
     <Modal
@@ -19,7 +23,7 @@ const CreateCompanyModal = ({ visible, onCreate, onCancel }) => {
           const values = await form.validateFields();
           const { data } = await createCompany(values);
           form.resetFields();
-          onCreate(data);
+          onCreate(data.createCompany);
         } catch (e) {}
       }}
     >
