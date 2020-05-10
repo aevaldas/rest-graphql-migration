@@ -50,9 +50,7 @@ function deleteById(companyId) {
         throw new Error(`Company with id: ${companyId} not found`);
     }
 
-    companies.splice(companyIndex, companyIndex + 1);
-
-    return { id: companyId };
+    return companies.splice(companyIndex, companyIndex + 1);
 }
 
 module.exports = {

@@ -65,9 +65,7 @@ function deleteById(employeeId) {
         throw new Error(`Employee with id: ${employeeId} not found`);
     }
 
-    employees.splice(employeeIndex, employeeIndex + 1);
-
-    return { id: employeeId };
+    return employees.splice(employeeIndex, employeeIndex + 1);
 }
 
 module.exports = {
