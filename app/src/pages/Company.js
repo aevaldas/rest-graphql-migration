@@ -112,18 +112,19 @@ class Company extends React.Component {
                 onBack={this.toCompanies}
                 extra={[
                     <Button
-                        key="1"
+                        key={1}
                         type="primary"
                         onClick={() => this.setState({isCreateEmployeeModalActive: true})}>
                         Add employee
                     </Button>,
                     <Popconfirm
+                        key={2}
                         title="Are you sure delete this task?"
                         onConfirm={this.deleteCompany}
                         okText="Yes"
                         cancelText="No"
                     >
-                        <Button key={2}>Delete company</Button>
+                        <Button>Delete company</Button>
                     </Popconfirm>
                 ]}
             >
