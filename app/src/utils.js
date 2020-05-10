@@ -1,1 +1,2 @@
-export const formatDataForTable = (data) => data.map(({id, ...rest}) => ({key: id, ...rest}));
+export const formatDataForTable = (data) =>
+  data.map(({ id, ...rest }) => ({ key: id, ...rest }));
