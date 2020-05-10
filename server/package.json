@@ -7,7 +7,7 @@
   "author": "Evaldas Alčauskis <evaldas.alcauskis@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node server/index.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
