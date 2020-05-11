@@ -11,7 +11,7 @@ const CreateEmployeeModal = ({ companyId, visible, onCreate, onCancel }) => {
   return (
     <Modal
       visible={visible}
-      title="Create a new company"
+      title="Create a new employee"
       okText="Create"
       cancelText="Cancel"
       onCancel={onCancel}
