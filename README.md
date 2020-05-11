@@ -15,3 +15,18 @@ Employees:
 * `GET /api/employees/:id` Returns employee which has id
 * `POST /api/employees` Creates a new employee, with details in request body
 * `DELETE /api/employees/:id` Deletes employee which has id
+
+## Launch
+### Backend
+* `cd server`
+* `yarn`
+* `yarn start`
+
+Launch `http://localhost:3001`
+
+### Frontend
+* `cd app`
+* `yarn`
+* `yarn start`
+
+Frontend application will be launched automatically on your browser. Otherwise open on your browser: `http://localhost:3000`
