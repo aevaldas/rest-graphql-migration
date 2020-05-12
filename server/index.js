@@ -2,6 +2,7 @@ const createError = require('http-errors')
 const express = require('express')
 const cors = require('cors')
 const router = require('./routes')
+const graphQLServer = require('./graphql')
 
 const app = express()
 const port = 3001
@@ -11,6 +12,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
 app.use(router);
+graphQLServer.applyMiddleware({ app });
 
 app.listen(port, () => console.log(`Backend server listening at http://localhost:${port}`))
 

@@ -1,0 +1,26 @@
+type Query {
+    companies: [Company],
+    company(id: ID!): Company,
+    employee(id: ID!): Employee
+    employees(companyId: ID!): [Employee]
+}
+
+type Mutation {
+    createCompany(title: String!, address: String!): Company,
+    deleteCompany(id: ID!): Company,
+    createEmployee(companyId: ID!, name: String!, jobName: String!): Employee,
+    deleteEmployee(id: ID!): Employee
+}
+
+type Company { 
+    id: ID!,
+    title: String,
+    address: String
+}
+
+type Employee {
+    id: ID!,
+    name: String,
+    jobName: String,
+    company: Company
+}
