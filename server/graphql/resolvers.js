@@ -36,6 +36,11 @@ const resolvers = {
       return dataSources.MigrationApi.getCompany(companyId);
     },
   },
+  Company: {
+    employees: ({ id }, _, { dataSources }) => {
+      return dataSources.MigrationApi.getCompanyEmployees(id);
+    },
+  },
 };
 
 module.exports = resolvers;

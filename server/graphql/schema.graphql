@@ -15,7 +15,8 @@ type Mutation {
 type Company { 
     id: ID!,
     title: String,
-    address: String
+    address: String,
+    employees: [Employee]
 }
 
 type Employee {
