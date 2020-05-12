@@ -21,6 +21,8 @@ class Company extends React.Component {
   state = {
     isLoading: true,
     isLoadingEmployees: true,
+    title: null,
+    address: null,
     employees: [],
     isCreateEmployeeModalActive: false,
   };
