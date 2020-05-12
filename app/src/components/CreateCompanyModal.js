@@ -8,7 +8,7 @@ const CreateCompanyModal = ({ visible, onCreate, onCancel }) => {
   const createCompany = (data) =>
     client.mutate({
       mutation: CREATE_COMPANY,
-      variables: { data },
+      variables: data,
     });
 
   return (

@@ -8,7 +8,7 @@ const CreateEmployeeModal = ({ companyId, visible, onCreate, onCancel }) => {
   const createEmployee = (data) =>
     client.mutate({
       mutation: CREATE_EMPLOYEE,
-      variables: { data: { ...data, companyId } },
+      variables: { ...data, companyId },
     });
 
   return (
