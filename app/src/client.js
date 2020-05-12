@@ -55,9 +55,18 @@ export const GET_COMPANY = gql`
   query getCompany($companyId: String!) {
     company: company(companyId: $companyId)
       @rest(type: "Company", path: "/companies/{args.companyId}") {
-      id
+      id @export(as: "companyId")
       title
       address
+      employees
+        @rest(
+          type: "EmployeesPayload"
+          path: "/companies/:companyId/employees"
+        ) {
+        id
+        name
+        jobName
+      }
     }
   }
 `;
@@ -73,20 +82,6 @@ export const DELETE_COMPANY = gql`
       id
       title
       address
-    }
-  }
-`;
-
-export const GET_COMPANY_EMPLOYEES = gql`
-  query getCompanyEmployees($companyId: String!) {
-    getCompanyEmployees: getCompanyEmployees(companyId: $companyId)
-      @rest(
-        type: "EmployeesPayload"
-        path: "/companies/{args.companyId}/employees"
-      ) {
-      id
-      name
-      jobName
     }
   }
 `;

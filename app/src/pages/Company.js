@@ -12,7 +12,6 @@ import client, {
   DELETE_COMPANY,
   DELETE_EMPLOYEE,
   GET_COMPANY,
-  GET_COMPANY_EMPLOYEES,
 } from "../client";
 import CreateEmployeeModal from "../components/CreateEmployeeModal";
 import { formatDataForTable } from "../utils";
@@ -20,7 +19,6 @@ import { formatDataForTable } from "../utils";
 class Company extends React.Component {
   state = {
     isLoading: true,
-    isLoadingEmployees: true,
     title: null,
     address: null,
     employees: [],
@@ -42,37 +40,18 @@ class Company extends React.Component {
       .then(
         ({
           data: {
-            company: { title, address },
+            company: { title, address, employees },
           },
         }) => {
           this.setState({
             isLoading: false,
             title,
             address,
+            employees,
           });
-          this.getEmployees();
         }
       )
       .catch(this.toCompanies);
-  };
-
-  getEmployees = () => {
-    return client
-      .query({
-        query: GET_COMPANY_EMPLOYEES,
-        variables: {
-          companyId: this.props.match.params.companyId,
-        },
-      })
-      .then(({ data: { getCompanyEmployees } }) => {
-        this.setState({
-          isLoadingEmployees: false,
-          employees: getCompanyEmployees.map(({ id, ...rest }) => ({
-            key: id,
-            ...rest,
-          })),
-        });
-      });
   };
 
   toCompanies = () => {
@@ -98,7 +77,7 @@ class Company extends React.Component {
       })
       .then(() => {
         this.setState(({ employees }) => {
-          const index = employees.findIndex((item) => item.key === id);
+          const index = employees.findIndex((item) => item.id === id);
 
           if (index === -1) {
             return null;
@@ -124,7 +103,7 @@ class Company extends React.Component {
 
   render() {
     const {
-      isLoadingEmployees,
+      isLoading,
       title,
       address,
       employees,
@@ -189,7 +168,7 @@ class Company extends React.Component {
           <Descriptions.Item label="Address">{address}</Descriptions.Item>
         </Descriptions>
         <Table
-          loading={isLoadingEmployees}
+          loading={isLoading}
           columns={columns}
           dataSource={formatDataForTable(employees)}
         />
