@@ -44,7 +44,7 @@ class Company extends React.Component {
       .then(({ data }) => {
         this.setState({
           isLoadingEmployees: false,
-          employees: data.map(({ id, ...rest }) => ({ key: id, ...rest })),
+          employees: data,
         });
       });
   };
@@ -62,7 +62,7 @@ class Company extends React.Component {
   deleteEmployee = (id) => {
     return axios.delete(`/employees/${id}`).then(() => {
       this.setState(({ employees }) => {
-        const index = employees.findIndex((item) => item.key === id);
+        const index = employees.findIndex((item) => item.id === id);
 
         if (index === -1) {
           return null;
