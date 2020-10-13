@@ -30,3 +30,6 @@ Launch `http://localhost:3001`
 * `yarn start`
 
 Frontend application will be launched automatically on your browser. Otherwise open on your browser: `http://localhost:3000`
+
+## Migration steps
+All the migration steps are shown in the pull requests: https://github.com/aevaldas/rest-graphql-migration/pulls
